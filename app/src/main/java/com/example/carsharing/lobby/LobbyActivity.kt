@@ -9,6 +9,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.DatePicker
 import android.widget.Toast
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.carsharing.*
 import com.example.carsharing.API
 import com.example.carsharing.ResponseLogout
@@ -31,14 +32,22 @@ class LobbyActivity : AppCompatActivity() {
     lateinit var bottomBehavior: BottomSheetBehavior<View>
     lateinit var bottomBehaviorSearch:BottomSheetBehavior<View>
     lateinit var bottomSheet: View
-    var date: String? = null
+     var date: String? = null
+    private val postAdapter = PostAdapter()
+    private var allpostsList : MutableList<AllpostsDetails> = arrayListOf()
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(com.example.carsharing.R.layout.activity_lobby)
+        setContentView(R.layout.activity_lobby)
+
 
         bottomBehavior = BottomSheetBehavior.from(bottom_sheet)
         bottomBehaviorSearch = BottomSheetBehavior.from(bottom_sheet_search)
         hideBottomSheet()
+        rv_allposts.layoutManager = LinearLayoutManager(this)
+        rv_allposts.adapter = postAdapter
+        showPosts()
 
         //登出
         toolbar_back.setOnClickListener{
@@ -98,27 +107,33 @@ class LobbyActivity : AppCompatActivity() {
         }
         //發送刊登
         sheet_finish.setOnClickListener {
-            API.apiInterface.post(RequestPost(ed_departure.text.toString(), "${date}T00:00:00+08:00",
-                ed_description.text.toString(), ed_destination.text.toString(), ed_seat.text.toString(),
-                ed_subject.text.toString())).enqueue(object: Callback<ResponsePost>{
-                override fun onFailure(call: Call<ResponsePost>, t: Throwable) {
-                    println("========$t")
-                }
-                override fun onResponse(call: Call<ResponsePost>, response: Response<ResponsePost>) {
-                    if(response.code()==200){
-                        Toast.makeText(this@LobbyActivity, "刊登成功！",Toast.LENGTH_SHORT).show()
-                        //送出成功後清空
-                        ed_departure.setText("")
-                        ed_date.setText("")
-                        ed_subject.setText("")
-                        ed_seat.setText("")
-                        ed_destination.setText("")
-                        ed_description.setText("")
-                        //跳回主頁
-                        hideBottomSheet()
+            if(ed_departure.text == null || ed_date.text == null || ed_description.text == null ||
+                ed_destination.text == null || ed_seat.text == null || ed_subject.text == null){
+                Toast.makeText(this@LobbyActivity, "欄位請勿空白", Toast.LENGTH_SHORT).show()
+            }else{
+                API.apiInterface.post(RequestPost(ed_departure.text.toString(), "${date}T00:00:00+08:00",
+                    ed_description.text.toString(), ed_destination.text.toString(), ed_seat.text.toString(),
+                    ed_subject.text.toString())).enqueue(object: Callback<ResponsePost>{
+                    override fun onFailure(call: Call<ResponsePost>, t: Throwable) {
+                        println("========$t")
                     }
-                }
-            })
+                    override fun onResponse(call: Call<ResponsePost>, response: Response<ResponsePost>) {
+                        if(response.code()==200){
+                            Toast.makeText(this@LobbyActivity, "刊登成功！",Toast.LENGTH_SHORT).show()
+                            //送出成功後清空
+                            ed_departure.setText("")
+                            ed_date.setText("")
+                            ed_subject.setText("")
+                            ed_seat.setText("")
+                            ed_destination.setText("")
+                            ed_description.setText("")
+                            //跳回主頁並刷新
+                            hideBottomSheet()
+                            showPosts()
+                        }
+                    }
+                })
+            }
         }
          ObjectAnimator.ofFloat(icon_arrow_1,"alpha",0f,0.33f,0f).apply {
             duration = 2000
@@ -164,8 +179,7 @@ class LobbyActivity : AppCompatActivity() {
         }
         //站內搜尋
         btn_inside_post.setOnClickListener {
-            val intent = SearchActivity.getIntent(this, date,et_departure_station.text.toString(),et_destination.text.toString())
-//            startActivity(Intent(this,SearchActivity::class.java))
+            val intent = SearchActivity.getIntent(this, date,et_departure_station.text.toString(),et_destination.text.toString(),1)
             startActivity(intent)
             bottomBehaviorSearch.isHideable=false
             setSearchBottomViewVisible(bottomBehaviorSearch.state != BottomSheetBehavior.STATE_EXPANDED)
@@ -173,11 +187,17 @@ class LobbyActivity : AppCompatActivity() {
         }
         //站外搜尋
         btn_outside_post.setOnClickListener {
-            startActivity(Intent(this,SearchActivity::class.java))
+            val intent = SearchActivity.getIntent(this, date,et_departure_station.text.toString(),et_destination.text.toString(),2)
+            startActivity(intent)
+            bottomBehaviorSearch.isHideable=false
+            setSearchBottomViewVisible(bottomBehaviorSearch.state != BottomSheetBehavior.STATE_EXPANDED)
         }
         //全站搜尋
         btn_all_post.setOnClickListener {
-            startActivity(Intent(this,SearchActivity::class.java))
+            val intent = SearchActivity.getIntent(this, date,et_departure_station.text.toString(),et_destination.text.toString(),0)
+            startActivity(intent)
+            bottomBehaviorSearch.isHideable=false
+            setSearchBottomViewVisible(bottomBehaviorSearch.state != BottomSheetBehavior.STATE_EXPANDED)
         }
 
 
@@ -213,5 +233,35 @@ class LobbyActivity : AppCompatActivity() {
     }
     fun showArrow(){
 
+    }
+
+    //呈現全部文章
+    fun showPosts(){
+        API.apiInterface.getAll().enqueue(object: Callback<ResponseAllposts>{
+            override fun onFailure(call: Call<ResponseAllposts>, t: Throwable) {
+            }
+            override fun onResponse(call: Call<ResponseAllposts>, response: Response<ResponseAllposts>) {
+                if (response.code()==200){
+                    val responsebody = response.body()
+                    val dataList = responsebody!!.data
+                    allpostsList.addAll(dataList)
+                    postAdapter.update(allpostsList)
+                    postAdapter.setToClick(object : PostAdapter.ItemClickListener{
+                        override fun toClick(item: AllpostsDetails) {
+                            val intent = Intent(this@LobbyActivity, DetailActivity::class.java)
+                            intent.putExtra("departure", item.departure)
+                            intent.putExtra("destination", item.destination)
+                            intent.putExtra("subject", item.subject)
+                            intent.putExtra("date", item.departure_date)
+                            intent.putExtra("seat", item.seat)
+                            intent.putExtra("description", item.description)
+                            intent.putExtra("id", item.id)
+                            startActivityForResult(intent, 1)
+
+                        }
+                    })
+                }
+            }
+        })
     }
 }

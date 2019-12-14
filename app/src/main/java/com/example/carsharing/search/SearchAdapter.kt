@@ -25,7 +25,7 @@ class SearchAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     inner class SearchViewHolder(itemView: View):
         RecyclerView.ViewHolder(itemView){
 
-        val resource = itemView.tv_resoucre
+        val resource = itemView.tv_type
         val title = itemView.tv_title
         val itemLayout = itemView.layout_item
         fun bind(item:SearchDetails){

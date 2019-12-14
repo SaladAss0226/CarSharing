@@ -27,7 +27,7 @@
             tools:layout_editor_absoluteY="18dp" />
         <ImageView
             android:layout_width="wrap_content"
-            android:src="@drawable/ic_logout"
+            android:src="@drawable/ic_arrow_back_black_24"
             android:layout_height="wrap_content" android:id="@+id/tbar_back_search_page" tools:layout_editor_absoluteY="16dp"
             tools:layout_editor_absoluteX="16dp"/>
     </androidx.appcompat.widget.Toolbar>

@@ -61,14 +61,13 @@ data class PostDetail(
     val user_id: Int
 )
 
-//搜尋
-data class ResponseSearch(
-    val data: List<SearchDetails>,
+data class ResponseAllposts(
+    val data: List<AllpostsDetails>,
     val links: Links,
     val meta: Meta
 )
 
-data class SearchDetails(
+data class AllpostsDetails(
     val created_at: String,
     val departure: String,
     val departure_date: String,
@@ -97,4 +96,27 @@ data class Meta(
     val per_page: Int,
     val to: Int,
     val total: Int
+)
+
+
+
+//搜尋
+data class ResponseSearch(
+    val data: List<SearchDetails>,
+    val links: Links,
+    val meta: Meta
+)
+
+data class SearchDetails(
+    val created_at: String,
+    val departure: String,
+    val departure_date: String,
+    val description: String,
+    val destination: String,
+    val id: Int,
+    val ptt_url: Any,
+    val seat: Int,
+    val subject: String,
+    val type: Int,
+    val user_id: Int
 )

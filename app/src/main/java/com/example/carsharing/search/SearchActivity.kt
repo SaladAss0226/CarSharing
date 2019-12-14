@@ -21,6 +21,26 @@ class SearchActivity : AppCompatActivity() {
 
     val searchAdapter = SearchAdapter()
 
+    companion object {
+        fun getIntent(
+            context: Context,
+            date: String?,
+            departureStation: String?,
+            destinationStation: String?,
+            type:Int
+        ): Intent {
+            val intent = Intent()
+            intent.putExtra("DATE", date)
+            intent.putExtra("DEPARTURE", departureStation)
+            intent.putExtra("DESTINATION", destinationStation)
+            intent.putExtra("type",type)
+            intent.setClass(context, SearchActivity::class.java)
+            return intent
+        }
+
+        lateinit var itemClicked:SearchDetails
+    }
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,7 +49,8 @@ class SearchActivity : AppCompatActivity() {
 
         SearchAdapter.setToClick(object :SearchAdapter.mItemClickListener {
             override fun toClick(items: SearchDetails) {
-
+                itemClicked = items
+                startActivity(Intent(this@SearchActivity,SearchDetailActivity::class.java))
             }
         })
 
@@ -39,15 +60,19 @@ class SearchActivity : AppCompatActivity() {
             var date = it?.getString("DATE")
             val departure = it?.getString("DEPARTURE")
             val destination = it?.getString("DESTINATION")
+            var type = it?.getInt("type")
 
             if (date != null) {
                 date = "${date}T00:00:00+08:00"
             }
+            if(type==0) type=null
+
+            //呼叫api
         API.apiInterface.search(
             date,
             departure,
             destination,
-            1,
+            type,
             15).enqueue(object : Callback<ResponseSearch> {
             override fun onResponse(
                 call: Call<ResponseSearch>,
@@ -55,10 +80,11 @@ class SearchActivity : AppCompatActivity() {
             ) {
                 println("response code: ${response.code()}")
                 if(response.code()==200){
-                    val body = response.body()
+                    var body = response.body()
                     unAssignList.clear()
                     unAssignList.addAll(body!!.data)
                     searchAdapter.notifyDataSetChanged()
+
                 }
 
             }
@@ -89,19 +115,5 @@ class SearchActivity : AppCompatActivity() {
         rv_search_result.adapter = searchAdapter
     }
 
-    companion object {
-        fun getIntent(
-            context: Context,
-            date: String?,
-            departureStation: String?,
-            destinationStation: String?
-        ): Intent {
-            val intent = Intent()
-            intent.putExtra("DATE", date)
-            intent.putExtra("DEPARTURE", departureStation)
-            intent.putExtra("DESTINATION", destinationStation)
-            intent.setClass(context, SearchActivity::class.java)
-            return intent
-        }
-    }
+
 }
