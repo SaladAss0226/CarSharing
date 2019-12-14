@@ -5,6 +5,7 @@ data class ResponseLogout(
     val message: String,
     val result: Boolean
 )
+
 data class RequestSignup(
     val email: String,
     val password: String,
