@@ -2,6 +2,7 @@ package com.example.carsharing
 
 import retrofit2.Call
 import retrofit2.http.Body
+import retrofit2.http.GET
 import retrofit2.http.POST
 
 interface Api_Interface {
@@ -20,4 +21,7 @@ interface Api_Interface {
     @POST(" /api/post")
     fun post(@Body requestPost: RequestPost): Call<ResponsePost>
 
+    //查看全部文章
+    @GET("/api/post")
+    fun getAll(): Call<ResponseAllposts>
 }
