@@ -21,6 +21,9 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
+        et_account_signin.setText("12345@gmail.com")
+        et_password_signin.setText("123123")
+
         //註冊
         btn_sign_up.setOnClickListener {
             startActivity(Intent(this,SignUpActivity::class.java))

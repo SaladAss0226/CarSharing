@@ -8,6 +8,7 @@
     <include layout="@layout/layout_lobby" />
     <!-- Adding bottom sheet after main content -->
     <include layout="@layout/layout_bottomsheet" />
+    <include layout="@layout/layout_bottomsheet_search"/>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 

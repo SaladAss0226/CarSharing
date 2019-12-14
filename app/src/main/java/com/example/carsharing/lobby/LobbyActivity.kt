@@ -4,28 +4,35 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.view.ViewGroup
 import android.widget.Toast
 import com.example.carsharing.API
-import com.example.carsharing.ResponseLogout
 import com.example.carsharing.R
+import com.example.carsharing.ResponseLogout
 import com.example.carsharing.logIn.LoginActivity
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import kotlinx.android.synthetic.main.activity_lobby.*
 import kotlinx.android.synthetic.main.layout_bottomsheet.*
+import kotlinx.android.synthetic.main.layout_bottomsheet_search.*
 import kotlinx.android.synthetic.main.layout_lobby.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import android.util.DisplayMetrics
+
+
 
 class LobbyActivity : AppCompatActivity() {
     lateinit var bottomBehavior: BottomSheetBehavior<View>
+    lateinit var bottomBehaviorSearch:BottomSheetBehavior<View>
     lateinit var bottomSheet: View
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_lobby)
+        setContentView(com.example.carsharing.R.layout.activity_lobby)
 
         bottomBehavior = BottomSheetBehavior.from(bottom_sheet)
+        bottomBehaviorSearch = BottomSheetBehavior.from(bottom_sheet_search)
         hideBottomSheet()
 
         //登出
@@ -55,6 +62,11 @@ class LobbyActivity : AppCompatActivity() {
             bottomBehavior.isHideable=false
             setBottomViewVisible(bottomBehavior.state != BottomSheetBehavior.STATE_EXPANDED)
         }
+        //搜尋
+        toolbar_search.setOnClickListener {
+            bottomBehaviorSearch.isHideable=false
+            setSearchBottomViewVisible(bottomBehaviorSearch.state != BottomSheetBehavior.STATE_EXPANDED)
+        }
 
 
 
@@ -62,6 +74,8 @@ class LobbyActivity : AppCompatActivity() {
     fun  hideBottomSheet(){
         bottomBehavior.isHideable=true
         bottomBehavior.state = BottomSheetBehavior.STATE_HIDDEN
+        bottomBehaviorSearch.isHideable=true
+        bottomBehaviorSearch.state = BottomSheetBehavior.STATE_HIDDEN
 
     }
     fun showBottomSheet(v: View) {
@@ -74,5 +88,13 @@ class LobbyActivity : AppCompatActivity() {
             bottomBehavior.state = BottomSheetBehavior.STATE_EXPANDED
         else
             bottomBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
+
+    }
+    private fun setSearchBottomViewVisible(showFlag: Boolean){
+        if (showFlag)
+            bottomBehaviorSearch.state = BottomSheetBehavior.STATE_EXPANDED
+        else
+            bottomBehaviorSearch.state = BottomSheetBehavior.STATE_COLLAPSED
+
     }
 }
