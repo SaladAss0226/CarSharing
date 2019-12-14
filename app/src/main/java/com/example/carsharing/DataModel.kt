@@ -60,3 +60,41 @@ data class PostDetail(
     val updated_at: String,
     val user_id: Int
 )
+
+data class ResponseAllposts(
+    val data: List<AllpostsDetails>,
+    val links: Links,
+    val meta: Meta
+)
+
+data class AllpostsDetails(
+    val created_at: String,
+    val departure: String,
+    val departure_date: String,
+    val description: String,
+    val destination: String,
+    val id: Int,
+    val ptt_url: Any,
+    val seat: Int,
+    val subject: String,
+    val type: Int,
+    val user_id: Int
+)
+
+data class Links(
+    val first: String,
+    val last: String,
+    val next: Any,
+    val prev: Any
+)
+
+data class Meta(
+    val current_page: Int,
+    val from: Int,
+    val last_page: Int,
+    val path: String,
+    val per_page: Int,
+    val to: Int,
+    val total: Int
+)
+
