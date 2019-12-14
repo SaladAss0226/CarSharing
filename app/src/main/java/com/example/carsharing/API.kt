@@ -23,7 +23,7 @@ object API {
                         .header("Content-Type", "application/json")
                         .header("Accept", "application/json")
                     if(token != null){
-                        requestBuilder.addHeader("Authorization","$token")
+                        requestBuilder.addHeader("Authorization","Bearer $token")
                     }
                     return chain.proceed(requestBuilder.build())
                 }
