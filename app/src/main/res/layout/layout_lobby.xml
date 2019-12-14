@@ -21,13 +21,13 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="共乘資訊"
-            android:textColor="#248EA9"
+            android:textColor="#393e46"
             android:textSize="24sp"
             tools:layout_editor_absoluteX="188dp"
             tools:layout_editor_absoluteY="18dp" />
         <ImageView
             android:layout_width="wrap_content"
-            android:src="@drawable/ic_arrow_back_black_24"
+            android:src="@drawable/ic_logout"
             android:layout_height="wrap_content" android:id="@+id/toolbar_back" tools:layout_editor_absoluteY="16dp"
             tools:layout_editor_absoluteX="16dp"/>
         <ImageView

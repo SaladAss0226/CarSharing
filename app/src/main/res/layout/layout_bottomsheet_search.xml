@@ -32,23 +32,113 @@
         android:hint="出發地"
         android:gravity="center"
 
-        app:layout_constraintVertical_bias="0.15"
+        app:layout_constraintVertical_bias="0.1"
         app:layout_constraintTop_toBottomOf="@id/icon_bottom_sheet_search"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
+
+    <ImageView
+        android:id="@+id/icon_arrow_1"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/ic_keyboard_arrow_down_black_24dp"
+        android:alpha="0.3"
+
+        app:layout_constraintTop_toBottomOf="@id/et_departure_station"
+        app:layout_constraintBottom_toTopOf="@id/et_destination"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintVertical_bias="0.3"/>
+    <ImageView
+        android:id="@+id/icon_arrow_2"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/ic_keyboard_arrow_down_black_24dp"
+        android:alpha="0.6"
+
+        app:layout_constraintTop_toBottomOf="@id/et_departure_station"
+        app:layout_constraintBottom_toTopOf="@id/et_destination"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintVertical_bias="0.6"/>
+    <ImageView
+        android:id="@+id/icon_arrow_3"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/ic_keyboard_arrow_down_black_24dp"
+        android:alpha="0.9"
+
+        app:layout_constraintTop_toBottomOf="@id/et_departure_station"
+        app:layout_constraintBottom_toTopOf="@id/et_destination"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintVertical_bias="0.9"/>
 
     <EditText
         android:id="@+id/et_destination"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
+        android:hint="目的地"
+        android:gravity="center"
 
-
-        app:layout_constraintVertical_bias="0.55"
+        app:layout_constraintVertical_bias="0.45"
         app:layout_constraintTop_toBottomOf="@id/icon_bottom_sheet_search"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
+
+    <TextView
+        android:id="@+id/tv_departure_date"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:hint="出發日期"
+        android:lineSpacingExtra="10sp"
+
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/icon_bottom_sheet_search"
+        app:layout_constraintVertical_bias="0.6" />
+    <Button
+        android:id="@+id/btn_inside_post"
+        android:layout_width="40dp"
+        android:layout_height="100dp"
+        android:text="站\n內\n搜\n尋"
+        android:background="@drawable/shape_button"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_departure_date"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.25"/>
+    <Button
+        android:id="@+id/btn_all_post"
+        android:layout_width="40dp"
+        android:layout_height="120dp"
+        android:text="全\n站\n搜\n尋"
+        android:background="@drawable/shape_button"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_departure_date"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"/>
+    <Button
+        android:id="@+id/btn_outside_post"
+        android:layout_width="40dp"
+        android:layout_height="100dp"
+        android:text="站\n外\n搜\n尋"
+        android:background="@drawable/shape_button"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_departure_date"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.75"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
