@@ -16,4 +16,8 @@ interface Api_Interface {
     @POST("/api/logout")
     fun logout(): Call<ResponseLogout>
 
+    //刊登
+    @POST(" /api/post")
+    fun post(@Body requestPost: RequestPost): Call<ResponsePost>
+
 }
