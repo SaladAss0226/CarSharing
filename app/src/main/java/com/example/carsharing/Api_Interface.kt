@@ -4,6 +4,7 @@ import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
+import retrofit2.http.Query
 
 interface Api_Interface {
 
@@ -23,5 +24,5 @@ interface Api_Interface {
 
     //查看全部文章
     @GET("/api/post")
-    fun getAll(): Call<ResponseAllposts>
+    fun getAll(@Query ("row") row:Int): Call<ResponseAllposts>
 }
