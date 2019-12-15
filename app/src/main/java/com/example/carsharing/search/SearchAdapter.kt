@@ -1,5 +1,6 @@
 package com.example.carsharing.search
 
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -30,43 +31,24 @@ class SearchAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         val itemLayout = itemView.layout_item
         fun bind(item:SearchDetails){
             title.text = item.subject
-            resource.text = if(item.ptt_url==null) "站內" else "批踢踢"
+
+            if(item.type==1){
+                resource.text = "站內"
+                resource.setTextColor(Color.rgb(202, 62, 71))
+                resource.setBackgroundResource(R.drawable.ic_bottom_shape2)
+            }
+            else {
+                resource.text = "批踢踢"
+                resource.setBackgroundResource(R.drawable.ic_bottom_shape)
+                resource.setTextColor(Color.rgb(36, 142, 169))
+            }
         }
 
     }
 
-//    inner class GridViewHolder(itemView:View):
-//        RecyclerView.ViewHolder(itemView){
-//        val icon01 = itemView.imgv02
-//        val name02 = itemView.tv_name02
-//
-//        fun bind(item:com.example.carsharing.SearchDetails){
-//            icon.setImageResource(item.img)
-//            name02.text = item.name
-//        }
-//
-//    }
-
-//    //判斷data其中一項屬性來判斷該使用哪種viewType
-//    override fun getItemViewType(position: Int): Int {
-//        return if(unAssignList[position].isGridView) 1 else 2
-//    }
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int):
             RecyclerView.ViewHolder {
 
-//        return  when (viewType){
-//            1->{
-//                val inflater = LayoutInflater.from(parent.context)
-//                val example = inflater.inflate(R.layout.example_grid_style, parent, false)
-//                GridViewHolder(example)
-//            }
-//            else->{
-//                val inflater = LayoutInflater.from(parent.context)
-//                val example = inflater.inflate(R.layout.example_list_style, parent, false)
-//                ListViewHolder(example)
-//            }
-//        }
         val inflater = LayoutInflater.from(parent.context)
         val example = inflater.inflate(R.layout.post_itemview, parent, false)
         return SearchViewHolder(example)

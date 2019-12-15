@@ -83,6 +83,7 @@ class SearchActivity : AppCompatActivity() {
                     var body = response.body()
                     unAssignList.clear()
                     unAssignList.addAll(body!!.data)
+                    val url = body.data
                     searchAdapter.notifyDataSetChanged()
 
                 }

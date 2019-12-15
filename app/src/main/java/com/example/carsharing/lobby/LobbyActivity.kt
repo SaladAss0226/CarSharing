@@ -256,6 +256,7 @@ class LobbyActivity : AppCompatActivity() {
                             intent.putExtra("seat", item.seat)
                             intent.putExtra("description", item.description)
                             intent.putExtra("id", item.id)
+                            intent.putExtra("url", item.ptt_url)
                             startActivityForResult(intent, 1)
 
                         }
