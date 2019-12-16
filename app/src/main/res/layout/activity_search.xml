@@ -21,7 +21,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="查詢結果"
-            android:textColor="#393e46"
+            android:textColor="#14354C"
             android:textSize="24sp"
             tools:layout_editor_absoluteX="188dp"
             tools:layout_editor_absoluteY="18dp" />
