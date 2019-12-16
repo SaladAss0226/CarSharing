@@ -276,6 +276,9 @@ class LobbyActivity : AppCompatActivity() {
                     last_page = responsebody.meta.last_page
                     println("=======current_page=$current_page")
                     println("=======last_page=$last_page")
+                    runOnUiThread{
+                        pageTextView.text="Page ($current_page / $last_page)"
+                    }
                     val dataList = responsebody.data
                     allpostsList.clear()
                     allpostsList.addAll(dataList)
