@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Html
 import android.text.method.LinkMovementMethod
+import android.view.View
 import com.example.carsharing.R
 import com.example.carsharing.search.SearchActivity.Companion.itemClicked
 import com.example.carsharing.search.SearchAdapter.Companion.unAssignList
@@ -18,28 +19,21 @@ class SearchDetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_search_detail)
 
-        details_departure.text = itemClicked.departure
-        detail_destination.text = itemClicked.destination
-        detail_subject.text = itemClicked.subject
-        detail_date.text = itemClicked.departure_date
-        detail_seat.text = itemClicked.seat.toString()
-        detail_describe.text = itemClicked.description
-        detail_url.movementMethod = LinkMovementMethod.getInstance()
+        search_details_departure.text = itemClicked.departure
+        search_detail_destination.text = itemClicked.destination
+        search_detail_subject.text = itemClicked.subject
+        search_detail_date.text = itemClicked.departure_date
+        search_detail_seat.text = "剩餘${itemClicked.seat}個座位"
+        search_detail_describe.text = itemClicked.description
 
-        if(itemClicked.ptt_url==null) detail_url.text = ""
-        else if(itemClicked.ptt_url!=null){
-//            detail_url.setText(Html.fromHtml(itemClicked.ptt_url,Html.FROM_HTML_MODE_COMPACT))
-            if (Build.VERSION.SDK_INT >= 24) {
-                detail_url.text = Html.fromHtml(itemClicked.ptt_url,Html.FROM_HTML_MODE_COMPACT)
-            }
-            else{
-                detail_url.text = Html.fromHtml(itemClicked.ptt_url)
-            }
+        if(itemClicked.type==1) search_detail_url.text = ""
+       else if(itemClicked.type==2){
+            search_detail_url.setText(Html.fromHtml(itemClicked.ptt_url,Html.FROM_HTML_MODE_COMPACT))
+            search_detail_url.movementMethod = LinkMovementMethod.getInstance()
+            search_constraint1.visibility = View.GONE
         }
 
-
-
-        details_back.setOnClickListener {
+        search_details_back.setOnClickListener {
             this.finish()
         }
 

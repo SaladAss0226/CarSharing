@@ -26,6 +26,18 @@ import java.util.*
 import android.util.Log
 import android.view.animation.LinearInterpolator
 import com.example.carsharing.search.SearchActivity
+import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory
+import androidx.core.graphics.drawable.RoundedBitmapDrawable
+import android.graphics.BitmapFactory
+import android.graphics.Bitmap
+import android.R.string.no
+import android.R.attr.name
+import androidx.core.app.ComponentActivity
+import androidx.core.app.ComponentActivity.ExtraData
+import androidx.core.content.ContextCompat.getSystemService
+import android.icu.lang.UCharacter.GraphemeClusterBreak.T
+
+
 
 
 class LobbyActivity : AppCompatActivity() {
@@ -35,6 +47,8 @@ class LobbyActivity : AppCompatActivity() {
      var date: String? = null
     private val postAdapter = PostAdapter()
     private var allpostsList : MutableList<AllpostsDetails> = arrayListOf()
+//    private var current_page = 1
+//    private var last_page: Int? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -47,7 +61,7 @@ class LobbyActivity : AppCompatActivity() {
         hideBottomSheet()
         rv_allposts.layoutManager = LinearLayoutManager(this)
         rv_allposts.adapter = postAdapter
-        showPosts()
+        showPosts(50)
 
         //登出
         toolbar_back.setOnClickListener{
@@ -64,10 +78,6 @@ class LobbyActivity : AppCompatActivity() {
                 }
             })
 
-            //發案子
-            toolbar_add.setOnClickListener{
-
-            }
 
         }
 
@@ -129,7 +139,7 @@ class LobbyActivity : AppCompatActivity() {
                             ed_description.setText("")
                             //跳回主頁並刷新
                             hideBottomSheet()
-                            showPosts()
+                            showPosts(50)
                         }
                     }
                 })
@@ -201,9 +211,6 @@ class LobbyActivity : AppCompatActivity() {
         }
 
 
-
-
-
     }
     fun  hideBottomSheet(){
         bottomBehavior.isHideable=true
@@ -236,13 +243,18 @@ class LobbyActivity : AppCompatActivity() {
     }
 
     //呈現全部文章
-    fun showPosts(){
-        API.apiInterface.getAll().enqueue(object: Callback<ResponseAllposts>{
+    fun showPosts(page: Int){
+        val toPage = page + 1
+        println("=======$toPage")
+
+        API.apiInterface.getAll(toPage).enqueue(object: Callback<ResponseAllposts>{
             override fun onFailure(call: Call<ResponseAllposts>, t: Throwable) {
             }
             override fun onResponse(call: Call<ResponseAllposts>, response: Response<ResponseAllposts>) {
                 if (response.code()==200){
                     val responsebody = response.body()
+//                    current_page = responsebody!!.meta.current_page
+//                    last_page = responsebody.meta.last_page
                     val dataList = responsebody!!.data
                     allpostsList.addAll(dataList)
                     postAdapter.update(allpostsList)
@@ -258,7 +270,6 @@ class LobbyActivity : AppCompatActivity() {
                             intent.putExtra("id", item.id)
                             intent.putExtra("url", item.ptt_url)
                             startActivityForResult(intent, 1)
-
                         }
                     })
                 }
