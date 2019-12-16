@@ -47,8 +47,8 @@ class LobbyActivity : AppCompatActivity() {
      var date: String? = null
     private val postAdapter = PostAdapter()
     private var allpostsList : MutableList<AllpostsDetails> = arrayListOf()
-//    private var current_page = 1
-//    private var last_page: Int? = null
+    private var current_page: Int? = 1
+    private var last_page: Int? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -61,7 +61,7 @@ class LobbyActivity : AppCompatActivity() {
         hideBottomSheet()
         rv_allposts.layoutManager = LinearLayoutManager(this)
         rv_allposts.adapter = postAdapter
-        showPosts(50)
+        showPosts(current_page!!)
 
         //登出
         toolbar_back.setOnClickListener{
@@ -137,14 +137,35 @@ class LobbyActivity : AppCompatActivity() {
                             ed_seat.setText("")
                             ed_destination.setText("")
                             ed_description.setText("")
-                            //跳回主頁並刷新
+                            //跳回主頁並刷新成第一頁
                             hideBottomSheet()
-                            showPosts(50)
+                            current_page = 1
+                            showPosts(current_page!!)
                         }
                     }
                 })
             }
         }
+
+        //回上頁
+        btn_previous_page.setOnClickListener {
+            if (current_page != 1) {
+                val page = current_page!! - 1
+                showPosts(page)
+            }else{
+                Toast.makeText(this, "沒有上一頁喔", Toast.LENGTH_SHORT).show()
+            }
+        }
+        //跳下頁
+        btn_next_page.setOnClickListener {
+            if (current_page != last_page){
+                val page = current_page!! + 1
+                showPosts(page)
+            }else{
+                Toast.makeText(this, "沒有下一頁喔", Toast.LENGTH_SHORT).show()
+            }
+        }
+
          ObjectAnimator.ofFloat(icon_arrow_1,"alpha",0f,0.33f,0f).apply {
             duration = 2000
             repeatCount = ValueAnimator.INFINITE
@@ -244,23 +265,25 @@ class LobbyActivity : AppCompatActivity() {
 
     //呈現全部文章
     fun showPosts(page: Int){
-        val toPage = page + 1
-        println("=======$toPage")
-
-        API.apiInterface.getAll(toPage).enqueue(object: Callback<ResponseAllposts>{
+        API.apiInterface.getAll(page).enqueue(object: Callback<ResponseAllposts>{
             override fun onFailure(call: Call<ResponseAllposts>, t: Throwable) {
             }
             override fun onResponse(call: Call<ResponseAllposts>, response: Response<ResponseAllposts>) {
                 if (response.code()==200){
                     val responsebody = response.body()
-//                    current_page = responsebody!!.meta.current_page
-//                    last_page = responsebody.meta.last_page
-                    val dataList = responsebody!!.data
+                    //先紀錄目前頁數和最尾頁數
+                    current_page = responsebody!!.meta.current_page
+                    last_page = responsebody.meta.last_page
+                    println("=======current_page=$current_page")
+                    println("=======last_page=$last_page")
+                    val dataList = responsebody.data
+                    allpostsList.clear()
                     allpostsList.addAll(dataList)
                     postAdapter.update(allpostsList)
                     postAdapter.setToClick(object : PostAdapter.ItemClickListener{
                         override fun toClick(item: AllpostsDetails) {
                             val intent = Intent(this@LobbyActivity, DetailActivity::class.java)
+                            intent.putExtra("type", item.type)
                             intent.putExtra("departure", item.departure)
                             intent.putExtra("destination", item.destination)
                             intent.putExtra("subject", item.subject)

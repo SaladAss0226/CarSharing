@@ -94,10 +94,10 @@ class SearchActivity : AppCompatActivity() {
             }
         }
         btn_search_previous_page.setOnClickListener {
-            tv_search_current_page.text = "第${currentPage}頁"
             if(currentPage<=1) Toast.makeText(this,"已經是第一頁了還想怎樣:)",Toast.LENGTH_SHORT).show()
             else {
                 currentPage--
+                tv_search_current_page.text = "第${currentPage}頁"
                 switchPage()
             }
         }

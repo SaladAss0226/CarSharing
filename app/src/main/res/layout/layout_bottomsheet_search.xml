@@ -108,7 +108,8 @@
         android:layout_width="40dp"
         android:layout_height="100dp"
         android:text="站\n內\n搜\n尋"
-        android:background="@drawable/button_style01"
+        android:background="@drawable/button_style02"
+
 
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -120,7 +121,8 @@
         android:layout_width="40dp"
         android:layout_height="120dp"
         android:text="全\n站\n搜\n尋"
-        android:background="@drawable/button_style01"
+        android:background="@drawable/button_style02"
+
 
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -132,7 +134,8 @@
         android:layout_width="40dp"
         android:layout_height="100dp"
         android:text="站\n外\n搜\n尋"
-        android:background="@drawable/button_style01"
+        android:background="@drawable/button_style02"
+
 
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

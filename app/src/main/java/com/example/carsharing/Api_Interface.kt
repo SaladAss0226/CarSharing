@@ -24,7 +24,7 @@ interface Api_Interface {
 
     //查看全部文章
     @GET("/api/post")
-    fun getAll(@Query ("row") row:Int): Call<ResponseAllposts>
+    fun getAll(@Query ("page") page:Int): Call<ResponseAllposts>
 
     //搜尋
     @GET("/api/post")

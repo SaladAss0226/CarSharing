@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.text.Html
 import android.text.method.LinkMovementMethod
 import android.view.View
+import android.widget.LinearLayout
 import com.example.carsharing.R
 import com.example.carsharing.search.SearchActivity.Companion.itemClicked
 import com.example.carsharing.search.SearchAdapter.Companion.unAssignList
@@ -31,6 +32,9 @@ class SearchDetailActivity : AppCompatActivity() {
             search_detail_url.setText(Html.fromHtml(itemClicked.ptt_url,Html.FROM_HTML_MODE_COMPACT))
             search_detail_url.movementMethod = LinkMovementMethod.getInstance()
             search_constraint1.visibility = View.GONE
+            val params = LinearLayout.LayoutParams(search_constraint2.getLayoutParams())
+            params.setMargins(0, 400, 0, 0)
+            search_constraint2.setLayoutParams(params)
         }
 
         search_details_back.setOnClickListener {
