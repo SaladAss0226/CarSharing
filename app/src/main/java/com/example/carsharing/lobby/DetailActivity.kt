@@ -18,6 +18,7 @@ class DetailActivity : AppCompatActivity() {
         val date = intent.getStringExtra("date")
         val seat = intent.getIntExtra("seat", 0)
         val description = intent.getStringExtra("description")
+        val url = intent.getStringExtra("url")
         id = intent.getIntExtra("id", 0)
 
         details_departure.text = departure
@@ -26,6 +27,7 @@ class DetailActivity : AppCompatActivity() {
         detail_date.text = date
         detail_seat.text = "剩餘 ${seat} 個座位"
         detail_describe.text = description
+        detail_url.text = url
 
         //返回鍵
         details_back.setOnClickListener {

@@ -1,8 +1,11 @@
 package com.example.carsharing.logIn
 
 import android.content.Intent
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Html
+import android.text.method.LinkMovementMethod
 import android.util.Log
 import android.widget.Toast
 import com.example.carsharing.API
@@ -10,7 +13,9 @@ import com.example.carsharing.R
 import com.example.carsharing.RequestLogin
 import com.example.carsharing.ResponseLogin
 import com.example.carsharing.lobby.LobbyActivity
+import com.example.carsharing.search.SearchActivity
 import kotlinx.android.synthetic.main.activity_login.*
+import kotlinx.android.synthetic.main.activity_search_detail.*
 import retrofit2.Call
 import retrofit2.Response
 import javax.security.auth.callback.Callback
@@ -20,6 +25,10 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
+
+
+        et_account_signin.setText("12345@gmail.com")
+        et_password_signin.setText("123123")
 
         //註冊
         btn_sign_up.setOnClickListener {

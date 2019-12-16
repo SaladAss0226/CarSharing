@@ -68,6 +68,7 @@
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:text="註冊"
+        android:textColor="@color/my03"
         app:layout_constraintTop_toBottomOf="@id/et_re_password"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"

@@ -25,4 +25,13 @@ interface Api_Interface {
     //查看全部文章
     @GET("/api/post")
     fun getAll(@Query ("row") row:Int): Call<ResponseAllposts>
+
+    //搜尋
+    @GET("/api/post")
+    fun search(@Query ("departure_date") date:String?,
+               @Query ("departure") departureStation:String?,
+               @Query ("destination") destination:String?,
+               @Query ("type") type:Int?,
+               @Query ("row") row:Int): Call<ResponseSearch>
+
 }
