@@ -31,7 +31,7 @@ object API {
             .build()
         //retrofit實體
         return@lazy Retrofit.Builder()
-            .baseUrl("http://35.194.168.18")
+            .baseUrl("http://rayoutstanding.space/")
             .client(myOkHttpClient)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
