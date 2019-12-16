@@ -137,7 +137,7 @@ class LobbyActivity : AppCompatActivity() {
                             ed_seat.setText("")
                             ed_destination.setText("")
                             ed_description.setText("")
-                            //跳回主頁並刷新
+                            //跳回主頁並刷新成第一頁
                             hideBottomSheet()
                             current_page = 1
                             showPosts(current_page!!)
@@ -283,6 +283,7 @@ class LobbyActivity : AppCompatActivity() {
                     postAdapter.setToClick(object : PostAdapter.ItemClickListener{
                         override fun toClick(item: AllpostsDetails) {
                             val intent = Intent(this@LobbyActivity, DetailActivity::class.java)
+                            intent.putExtra("type", item.type)
                             intent.putExtra("departure", item.departure)
                             intent.putExtra("destination", item.destination)
                             intent.putExtra("subject", item.subject)
