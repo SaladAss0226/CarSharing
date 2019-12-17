@@ -5,9 +5,11 @@
     android:layout_height="match_parent"
     tools:context="lobby.LobbyActivity">
     <!-- Adding main view content -->
-    <include layout="@layout/layout_lobby" />
+    <include layout="@layout/layout_lobby"
+        android:id="@+id/haha"/>
+
     <!-- Adding bottom sheet after main content -->
-    <include layout="@layout/layout_bottomsheet" />
+    <include layout="@layout/layout_bottomsheet"/>
     <include layout="@layout/layout_bottomsheet_search"/>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
