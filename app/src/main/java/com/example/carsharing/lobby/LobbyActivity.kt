@@ -38,6 +38,8 @@ import androidx.core.app.ComponentActivity.ExtraData
 import androidx.core.content.ContextCompat.getSystemService
 import android.icu.lang.UCharacter.GraphemeClusterBreak.T
 import android.view.MotionEvent
+import androidx.core.view.isVisible
+import kotlinx.android.synthetic.main.activity_lobby.*
 
 
 class LobbyActivity : AppCompatActivity() {
@@ -90,7 +92,6 @@ class LobbyActivity : AppCompatActivity() {
         toolbar_search.setOnClickListener {
             bottomBehaviorSearch.isHideable=false
             setSearchBottomViewVisible(bottomBehaviorSearch.state != BottomSheetBehavior.STATE_EXPANDED)
-            layout_lobby.isFocusableInTouchMode = false  //???
         }
 
         //刊登頁返回
@@ -234,34 +235,36 @@ class LobbyActivity : AppCompatActivity() {
             setSearchBottomViewVisible(bottomBehaviorSearch.state != BottomSheetBehavior.STATE_EXPANDED)
         }
 
-        //bottomsheet狀態，外部是否可被點擊
+        //根據狀態，外部是否可被點擊
         bottomBehaviorSearch.setBottomSheetCallback(object: BottomSheetBehavior.BottomSheetCallback(){
             override fun onStateChanged(bottomSheet: View, newState: Int) {
                 if (newState == BottomSheetBehavior.STATE_EXPANDED){
-                    rv_allposts.isClickable = false
+                    rv_allposts.visibility = View.INVISIBLE
+                    toolbar_add.isClickable = false
                 }
                 if (newState == BottomSheetBehavior.STATE_COLLAPSED){
-                    rv_allposts.isClickable = true
+                    rv_allposts.visibility = View.VISIBLE
+                    toolbar_add.isClickable = true
+                }
+            }
+            override fun onSlide(bottomSheet: View, slideOffset: Float) {
+            }
+        })
+        bottomBehavior.setBottomSheetCallback(object: BottomSheetBehavior.BottomSheetCallback(){
+            override fun onStateChanged(bottomSheet: View, newState: Int) {
+                if (newState == BottomSheetBehavior.STATE_EXPANDED){
+                    rv_allposts.visibility = View.INVISIBLE
+                    toolbar_add.isClickable = false
+                }
+                if (newState == BottomSheetBehavior.STATE_COLLAPSED){
+                    rv_allposts.visibility = View.VISIBLE
+                    toolbar_add.isClickable = true
                 }
             }
             override fun onSlide(bottomSheet: View, slideOffset: Float) {
             }
         })
 
-
-    }
-    //點擊外部時，收起
-    override fun dispatchTouchEvent(event: MotionEvent?): Boolean {
-        if (event!!.getAction() == MotionEvent.ACTION_DOWN){
-            if (bottomBehaviorSearch.getState()==BottomSheetBehavior.STATE_EXPANDED) {
-                val outRect = Rect()
-                bottom_sheet_search.getGlobalVisibleRect(outRect)
-                if(!outRect.contains(event.getRawX().toInt(), event.getRawY().toInt())){
-                    bottomBehaviorSearch.setState(BottomSheetBehavior.STATE_COLLAPSED)
-                }
-            }
-        }
-        return super.dispatchTouchEvent(event)
     }
 
 
