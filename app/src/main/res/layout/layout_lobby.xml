@@ -98,7 +98,8 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:layout_weight="1"
-            android:text="上頁" />
+            android:text="上頁"
+            android:background="@drawable/button_style01"/>
 
         <TextView
             android:id="@+id/pageTextView"
@@ -116,7 +117,8 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:layout_weight="1"
-            android:text="下頁" />
+            android:text="下頁"
+            android:background="@drawable/button_style01"/>
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

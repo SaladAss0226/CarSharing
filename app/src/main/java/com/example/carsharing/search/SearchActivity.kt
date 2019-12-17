@@ -79,17 +79,16 @@ class SearchActivity : AppCompatActivity() {
 
             //換頁function
             switchPage()
-            tv_search_current_page.text = "第${currentPage}頁"
+
         }
 
 
 
 
         btn_search_next_page.setOnClickListener {
-            if(currentPage>=lastPage!!) Toast.makeText(this,"已經是最後一頁囉",Toast.LENGTH_SHORT).show()
+            if(currentPage>=lastPage!!) Toast.makeText(this,"已經是最後一頁了看不出來嗎",Toast.LENGTH_SHORT).show()
             else if(currentPage<lastPage!!){
                 currentPage++
-                tv_search_current_page.text = "第${currentPage}頁"
                 switchPage()
             }
         }
@@ -97,7 +96,6 @@ class SearchActivity : AppCompatActivity() {
             if(currentPage<=1) Toast.makeText(this,"已經是第一頁了還想怎樣:)",Toast.LENGTH_SHORT).show()
             else {
                 currentPage--
-                tv_search_current_page.text = "第${currentPage}頁"
                 switchPage()
             }
         }
@@ -132,6 +130,7 @@ class SearchActivity : AppCompatActivity() {
                     unAssignList.addAll(body!!.data)
                     val url = body.data
                     lastPage = body.meta.last_page
+                    tv_search_current_page.text = "Page(${currentPage}/${lastPage})"
                     searchAdapter.notifyDataSetChanged()
 
                 }
