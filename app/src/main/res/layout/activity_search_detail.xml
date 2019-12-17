@@ -7,7 +7,7 @@
     android:background="#14354C">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/details_toolbar"
+        android:id="@+id/search_details_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#AEE7E8"
@@ -19,7 +19,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/details_title"
+            android:id="@+id/search_details_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -30,7 +30,7 @@
             tools:layout_editor_absoluteY="18dp" />
 
         <ImageView
-            android:id="@+id/details_back"
+            android:id="@+id/search_details_back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_arrow_back_black_24"
@@ -48,7 +48,7 @@
         app:layout_constraintDimensionRatio="h,2:1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/details_toolbar" />
+        app:layout_constraintTop_toBottomOf="@id/search_details_toolbar" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_left"
@@ -83,14 +83,14 @@
             android:orientation="vertical" >
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/constraint1"
+                android:id="@+id/search_constraint1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="205dp"
                 android:background="@drawable/ic_solid_shape">
 
                 <TextView
-                    android:id="@+id/details_departure"
+                    android:id="@+id/search_details_departure"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
@@ -105,7 +105,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/detail_destination"
+                    android:id="@+id/search_detail_destination"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
@@ -136,16 +136,16 @@
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     android:layout_marginStart="16dp"
-                    app:layout_constraintBottom_toBottomOf="@+id/detail_destination"
+                    app:layout_constraintBottom_toBottomOf="@+id/search_detail_destination"
                     app:layout_constraintEnd_toStartOf="@+id/divider"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/details_departure"
+                    app:layout_constraintTop_toTopOf="@+id/search_details_departure"
                     app:srcCompat="@drawable/start" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/constraint2"
+                android:id="@+id/search_constraint2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
@@ -153,7 +153,7 @@
                 android:paddingBottom="30dp">
 
                 <TextView
-                    android:id="@+id/detail_subject"
+                    android:id="@+id/search_detail_subject"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
@@ -167,7 +167,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/detail_date"
+                    android:id="@+id/search_detail_date"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
@@ -178,10 +178,10 @@
                     android:textColor="#14354C"
                     android:textSize="18sp"
                     app:layout_constraintStart_toStartOf="@+id/guideline5"
-                    app:layout_constraintTop_toBottomOf="@+id/detail_subject" />
+                    app:layout_constraintTop_toBottomOf="@+id/search_detail_subject" />
 
                 <TextView
-                    android:id="@+id/detail_seat"
+                    android:id="@+id/search_detail_seat"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
@@ -191,10 +191,10 @@
                     android:textColor="#14354C"
                     android:textSize="18sp"
                     app:layout_constraintStart_toStartOf="@+id/guideline5"
-                    app:layout_constraintTop_toBottomOf="@+id/detail_date" />
+                    app:layout_constraintTop_toBottomOf="@+id/search_detail_date" />
 
                 <TextView
-                    android:id="@+id/detail_describe"
+                    android:id="@+id/search_detail_describe"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
@@ -205,11 +205,11 @@
                     android:textSize="18sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/guideline5"
-                    app:layout_constraintTop_toBottomOf="@+id/detail_seat"
+                    app:layout_constraintTop_toBottomOf="@+id/search_detail_seat"
                     tools:text="等到攻上山頂的那一剎那，會有另一種不同的心情，是一種如釋重負的感覺。我現在學會在山頂上停留一下子，在這離老天爺最近的地方，閉起眼睛看能...等到攻上山頂的那一剎那，會有另一種不同的心情，是一種如釋重負的感覺。我現在學會在山頂上停留一下子，在這離老天爺最近的地方，閉起眼睛看能..." />
 
                 <TextView
-                    android:id="@+id/detail_url"
+                    android:id="@+id/search_detail_url"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
@@ -224,7 +224,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/guideline5"
-                    app:layout_constraintTop_toBottomOf="@+id/detail_describe"
+                    app:layout_constraintTop_toBottomOf="@+id/search_detail_describe"
                     tools:text="ajskl;djfal;jeilaw;jl;afi" />
                 <androidx.constraintlayout.widget.Guideline
                     android:id="@+id/guideline5"
@@ -234,39 +234,39 @@
                     app:layout_constraintGuide_percent="0.12" />
 
                 <ImageView
-                    android:id="@+id/imageView10"
+                    android:id="@+id/search_imageView10"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     app:layout_constraintEnd_toStartOf="@+id/guideline5"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/detail_date"
+                    app:layout_constraintTop_toTopOf="@+id/search_detail_date"
                     app:srcCompat="@drawable/date" />
 
                 <ImageView
-                    android:id="@+id/imageView11"
+                    android:id="@+id/search_imageView11"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     app:layout_constraintEnd_toStartOf="@+id/guideline5"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/detail_subject"
+                    app:layout_constraintTop_toTopOf="@+id/search_detail_subject"
                     app:srcCompat="@drawable/subject" />
 
                 <ImageView
-                    android:id="@+id/imageView12"
+                    android:id="@+id/search_imageView12"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     app:layout_constraintEnd_toStartOf="@+id/guideline5"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/detail_seat"
+                    app:layout_constraintTop_toTopOf="@+id/search_detail_seat"
                     app:srcCompat="@drawable/seats" />
 
                 <ImageView
-                    android:id="@+id/imageView13"
+                    android:id="@+id/search_imageView13"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     app:layout_constraintEnd_toStartOf="@+id/guideline5"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/detail_describe"
+                    app:layout_constraintTop_toTopOf="@+id/search_detail_describe"
                     app:srcCompat="@drawable/info" />
 
 
@@ -274,7 +274,7 @@
 
 
             <Button
-                android:id="@+id/btn_join"
+                android:id="@+id/btn_join_search"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"

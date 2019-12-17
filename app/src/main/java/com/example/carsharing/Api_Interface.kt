@@ -32,6 +32,7 @@ interface Api_Interface {
                @Query ("departure") departureStation:String?,
                @Query ("destination") destination:String?,
                @Query ("type") type:Int?,
-               @Query ("row") row:Int): Call<ResponseSearch>
+               @Query ("row") row:Int,
+               @Query ("page") currentPage:Int): Call<ResponseSearch>
 
 }
