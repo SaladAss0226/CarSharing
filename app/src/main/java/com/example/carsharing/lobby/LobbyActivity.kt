@@ -32,18 +32,18 @@ import android.graphics.BitmapFactory
 import android.graphics.Bitmap
 import android.R.string.no
 import android.R.attr.name
+import android.graphics.Rect
 import androidx.core.app.ComponentActivity
 import androidx.core.app.ComponentActivity.ExtraData
 import androidx.core.content.ContextCompat.getSystemService
 import android.icu.lang.UCharacter.GraphemeClusterBreak.T
-
-
+import android.view.MotionEvent
 
 
 class LobbyActivity : AppCompatActivity() {
     lateinit var bottomBehavior: BottomSheetBehavior<View>
     lateinit var bottomBehaviorSearch:BottomSheetBehavior<View>
-    lateinit var bottomSheet: View
+//    lateinit var bottomSheet: View
      var date: String? = null
     private val postAdapter = PostAdapter()
     private var allpostsList : MutableList<AllpostsDetails> = arrayListOf()
@@ -90,6 +90,7 @@ class LobbyActivity : AppCompatActivity() {
         toolbar_search.setOnClickListener {
             bottomBehaviorSearch.isHideable=false
             setSearchBottomViewVisible(bottomBehaviorSearch.state != BottomSheetBehavior.STATE_EXPANDED)
+            layout_lobby.isFocusableInTouchMode = false  //???
         }
 
         //刊登頁返回
@@ -119,7 +120,7 @@ class LobbyActivity : AppCompatActivity() {
         sheet_finish.setOnClickListener {
             if(ed_departure.text == null || ed_date.text == null || ed_description.text == null ||
                 ed_destination.text == null || ed_seat.text == null || ed_subject.text == null){
-                Toast.makeText(this@LobbyActivity, "欄位請勿空白", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "欄位請勿空白", Toast.LENGTH_SHORT).show()
             }else{
                 API.apiInterface.post(RequestPost(ed_departure.text.toString(), "${date}T00:00:00+08:00",
                     ed_description.text.toString(), ed_destination.text.toString(), ed_seat.text.toString(),
@@ -152,6 +153,7 @@ class LobbyActivity : AppCompatActivity() {
             if (current_page != 1) {
                 val page = current_page!! - 1
                 showPosts(page)
+                rv_allposts.smoothScrollToPosition(1)
             }else{
                 Toast.makeText(this, "沒有上一頁喔", Toast.LENGTH_SHORT).show()
             }
@@ -161,6 +163,7 @@ class LobbyActivity : AppCompatActivity() {
             if (current_page != last_page){
                 val page = current_page!! + 1
                 showPosts(page)
+                rv_allposts.smoothScrollToPosition(1)
             }else{
                 Toast.makeText(this, "沒有下一頁喔", Toast.LENGTH_SHORT).show()
             }
@@ -188,7 +191,6 @@ class LobbyActivity : AppCompatActivity() {
             start()
         }
 
-
         //取得日期搜尋欄
         val calendarSearch = Calendar.getInstance()
         val listenerSearch = object : DatePickerDialog.OnDateSetListener{
@@ -201,6 +203,7 @@ class LobbyActivity : AppCompatActivity() {
                 println("=======date = $date")
             }
         }
+        //設定搜尋日期
         tv_departure_date.setOnClickListener{
             DatePickerDialog(this,
                 listenerSearch,
@@ -231,8 +234,37 @@ class LobbyActivity : AppCompatActivity() {
             setSearchBottomViewVisible(bottomBehaviorSearch.state != BottomSheetBehavior.STATE_EXPANDED)
         }
 
+        //bottomsheet狀態，外部是否可被點擊
+        bottomBehaviorSearch.setBottomSheetCallback(object: BottomSheetBehavior.BottomSheetCallback(){
+            override fun onStateChanged(bottomSheet: View, newState: Int) {
+                if (newState == BottomSheetBehavior.STATE_EXPANDED){
+                    rv_allposts.isClickable = false
+                }
+                if (newState == BottomSheetBehavior.STATE_COLLAPSED){
+                    rv_allposts.isClickable = true
+                }
+            }
+            override fun onSlide(bottomSheet: View, slideOffset: Float) {
+            }
+        })
+
 
     }
+    //點擊外部時，收起
+    override fun dispatchTouchEvent(event: MotionEvent?): Boolean {
+        if (event!!.getAction() == MotionEvent.ACTION_DOWN){
+            if (bottomBehaviorSearch.getState()==BottomSheetBehavior.STATE_EXPANDED) {
+                val outRect = Rect()
+                bottom_sheet_search.getGlobalVisibleRect(outRect)
+                if(!outRect.contains(event.getRawX().toInt(), event.getRawY().toInt())){
+                    bottomBehaviorSearch.setState(BottomSheetBehavior.STATE_COLLAPSED)
+                }
+            }
+        }
+        return super.dispatchTouchEvent(event)
+    }
+
+
     fun  hideBottomSheet(){
         bottomBehavior.isHideable=true
         bottomBehavior.state = BottomSheetBehavior.STATE_HIDDEN
@@ -259,9 +291,7 @@ class LobbyActivity : AppCompatActivity() {
             bottomBehaviorSearch.state = BottomSheetBehavior.STATE_COLLAPSED
 
     }
-    fun showArrow(){
 
-    }
 
     //呈現全部文章
     fun showPosts(page: Int){
