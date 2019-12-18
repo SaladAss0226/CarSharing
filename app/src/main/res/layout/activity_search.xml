@@ -21,7 +21,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="查詢結果"
-            android:textColor="#14354C"
+            android:textColor="@color/white"
             android:textSize="24sp"
             tools:layout_editor_absoluteX="188dp"
             tools:layout_editor_absoluteY="18dp" />
@@ -55,6 +55,7 @@
             android:layout_margin="10dp"
             android:layout_weight="1"
             android:text="上頁"
+            android:textColor="@color/white"
             android:background="@drawable/button_style01"/>
         <TextView
             android:id="@+id/tv_search_current_page"
@@ -74,6 +75,7 @@
             android:layout_weight="1"
             android:layout_margin="10dp"
             android:text="下頁"
+            android:textColor="@color/white"
             android:background="@drawable/button_style01"/>
     </LinearLayout>
 

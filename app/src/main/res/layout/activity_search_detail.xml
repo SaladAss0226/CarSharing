@@ -10,7 +10,7 @@
         android:id="@+id/search_details_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#AEE7E8"
+        android:background="@color/my05"
         android:elevation="1dp"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
@@ -24,7 +24,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="共乘內容"
-            android:textColor="#14354C"
+            android:textColor="@color/white"
             android:textSize="24sp"
             tools:layout_editor_absoluteX="188dp"
             tools:layout_editor_absoluteY="18dp" />
@@ -208,24 +208,6 @@
                     app:layout_constraintTop_toBottomOf="@+id/search_detail_seat"
                     tools:text="等到攻上山頂的那一剎那，會有另一種不同的心情，是一種如釋重負的感覺。我現在學會在山頂上停留一下子，在這離老天爺最近的地方，閉起眼睛看能...等到攻上山頂的那一剎那，會有另一種不同的心情，是一種如釋重負的感覺。我現在學會在山頂上停留一下子，在這離老天爺最近的地方，閉起眼睛看能..." />
 
-                <TextView
-                    android:id="@+id/search_detail_url"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginBottom="31dp"
-                    android:elevation="1dp"
-                    android:textColor="#14354C"
-                    android:autoLink="web"
-                    android:textSize="18sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="@+id/guideline5"
-                    app:layout_constraintTop_toBottomOf="@+id/search_detail_describe"
-                    tools:text="ajskl;djfal;jeilaw;jl;afi" />
                 <androidx.constraintlayout.widget.Guideline
                     android:id="@+id/guideline5"
                     android:layout_width="wrap_content"
@@ -279,8 +261,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
                 android:layout_marginBottom="40dp"
-                android:background="@drawable/ic_button_shape"
+                android:background="@drawable/button_style01"
                 android:text="我要報名"
+                android:textColor="@color/white"
                 android:textSize="18sp" />
 
         </LinearLayout>

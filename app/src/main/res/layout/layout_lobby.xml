@@ -11,10 +11,11 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#AEE7E8"
+        android:background="@color/my05"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -24,7 +25,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="共乘資訊"
-            android:textColor="#14354C"
+            android:textColor="@color/white"
             android:textSize="24sp"
             tools:layout_editor_absoluteX="188dp"
             tools:layout_editor_absoluteY="18dp" />
@@ -57,7 +58,7 @@
             tools:layout_editor_absoluteY="16dp" />
     </androidx.appcompat.widget.Toolbar>
 
-    <ScrollView
+    <androidx.core.widget.NestedScrollView
         android:id="@+id/scrollView_lobby"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -80,7 +81,7 @@
                 tools:listitem="@layout/post_itemview" />
 
         </LinearLayout>
-    </ScrollView>
+    </androidx.core.widget.NestedScrollView>
 
 
     <androidx.constraintlayout.widget.Guideline
@@ -112,6 +113,7 @@
             android:layout_margin="10dp"
             android:layout_weight="1"
             android:text="上頁"
+            android:textColor="@color/white"
             android:background="@drawable/button_style01"/>
 
         <TextView
@@ -131,6 +133,7 @@
             android:layout_margin="10dp"
             android:layout_weight="1"
             android:text="下頁"
+            android:textColor="@color/white"
             android:background="@drawable/button_style01"/>
     </LinearLayout>
 

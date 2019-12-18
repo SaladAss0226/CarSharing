@@ -1,17 +1,18 @@
 package com.example.carsharing.search
 
 import android.annotation.SuppressLint
-import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.text.Html
 import android.text.method.LinkMovementMethod
 import android.view.View
 import android.widget.LinearLayout
+import androidx.appcompat.app.AppCompatActivity
 import com.example.carsharing.R
 import com.example.carsharing.search.SearchActivity.Companion.itemClicked
-import com.example.carsharing.search.SearchAdapter.Companion.unAssignList
 import kotlinx.android.synthetic.main.activity_search_detail.*
+
 
 class SearchDetailActivity : AppCompatActivity() {
 
@@ -27,11 +28,11 @@ class SearchDetailActivity : AppCompatActivity() {
         search_detail_seat.text = "剩餘${itemClicked.seat}個座位"
         search_detail_describe.text = itemClicked.description
 
-        if(itemClicked.type==1) search_detail_url.text = ""
-       else if(itemClicked.type==2){
-            search_detail_url.setText(Html.fromHtml(itemClicked.ptt_url,Html.FROM_HTML_MODE_COMPACT))
-            search_detail_url.movementMethod = LinkMovementMethod.getInstance()
+        if(itemClicked.type==2){
+            search_detail_seat.visibility = View.GONE
+            search_imageView12.visibility = View.GONE
             search_constraint1.visibility = View.GONE
+            //動態設定margin
             val params = LinearLayout.LayoutParams(search_constraint2.getLayoutParams())
             params.setMargins(0, 400, 0, 0)
             search_constraint2.setLayoutParams(params)
@@ -39,6 +40,13 @@ class SearchDetailActivity : AppCompatActivity() {
 
         search_details_back.setOnClickListener {
             this.finish()
+        }
+        btn_join_search.setOnClickListener {
+            if(itemClicked.type==2){
+                val uri: Uri = Uri.parse(itemClicked.ptt_url)
+                startActivity(Intent(Intent.ACTION_VIEW, uri))
+            }
+
         }
 
     }
