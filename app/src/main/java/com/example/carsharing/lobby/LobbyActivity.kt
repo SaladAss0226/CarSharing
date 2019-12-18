@@ -26,20 +26,7 @@ import java.util.*
 import android.util.Log
 import android.view.animation.LinearInterpolator
 import com.example.carsharing.search.SearchActivity
-import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory
-import androidx.core.graphics.drawable.RoundedBitmapDrawable
-import android.graphics.BitmapFactory
-import android.graphics.Bitmap
-import android.R.string.no
-import android.R.attr.name
-import android.graphics.Rect
-import androidx.core.app.ComponentActivity
-import androidx.core.app.ComponentActivity.ExtraData
-import androidx.core.content.ContextCompat.getSystemService
-import android.icu.lang.UCharacter.GraphemeClusterBreak.T
-import android.view.MotionEvent
-import androidx.core.view.isVisible
-import kotlinx.android.synthetic.main.activity_lobby.*
+
 
 
 class LobbyActivity : AppCompatActivity() {
