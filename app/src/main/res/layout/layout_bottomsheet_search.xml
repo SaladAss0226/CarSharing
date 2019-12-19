@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="bottom"
-    android:background="@color/my04"
+    android:background="@color/white"
     android:elevation="1dp"
     android:orientation="vertical"
     app:behavior_hideable="false"
@@ -25,7 +25,7 @@
             android:id="@+id/icon_bottom_sheet_search"
             android:layout_width="50dp"
             android:layout_height="10dp"
-            android:src="@drawable/button_style01"
+            android:src="@drawable/button_style02"
 
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

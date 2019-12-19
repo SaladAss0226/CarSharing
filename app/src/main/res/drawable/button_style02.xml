@@ -10,6 +10,7 @@
             android:color="@color/my05"
             android:width="1.5dp"/>
             <corners android:radius="10dp"/>
+            <solid android:color="@color/white"/>
         </shape>
     </item>
 
