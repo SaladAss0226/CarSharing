@@ -35,19 +35,6 @@ class SignUpActivity : AppCompatActivity() {
                 signup_API(et_account_sign_up.text.toString(), et_password_sign_up.text.toString(), et_re_password.text.toString())
             }
         }
-
-        //google註冊按鈕
-        btn_google.setOnClickListener{
-            google_signup()
-        }
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == 100){
-            val result = Auth.GoogleSignInApi.getSignInResultFromIntent(data)
-            handleSignInResult(result)
-        }
     }
 
     //註冊的API
@@ -66,33 +53,4 @@ class SignUpActivity : AppCompatActivity() {
         })
     }
 
-    //用Google帳號註冊
-    private fun google_signup(){
-        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            .requestEmail()
-            .build()
-
-        val mGoogleApiClient = GoogleApiClient
-            .Builder(this)
-            .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
-            .build()
-        val signInIntent: Intent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient)
-        startActivityForResult(signInIntent, 100)
-    }
-    //接收google回傳結果
-    private fun handleSignInResult(result: GoogleSignInResult){
-        if (result.isSuccess){
-            val account = result.signInAccount
-            val getEmail = account!!.email
-            val getId = account.id
-            println("=======getEmail=$getEmail")
-            println("=======getId=$getId")
-
-            et_account_sign_up.setText(getEmail)
-            et_password_sign_up.setText(getId)
-            et_re_password.setText(getId)
-            signup_API(et_account_sign_up.text.toString(), et_password_sign_up.text.toString(), et_re_password.text.toString())
-        }
-
-    }
 }

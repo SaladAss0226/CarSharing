@@ -14,6 +14,10 @@ import com.example.carsharing.RequestLogin
 import com.example.carsharing.ResponseLogin
 import com.example.carsharing.lobby.LobbyActivity
 import com.example.carsharing.search.SearchActivity
+import com.facebook.CallbackManager
+import com.facebook.FacebookCallback
+import com.facebook.FacebookException
+import com.facebook.login.LoginResult
 import com.google.android.gms.auth.api.Auth
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.auth.api.signin.GoogleSignInResult
@@ -27,10 +31,13 @@ import retrofit2.Response
 import javax.security.auth.callback.Callback
 
 class LoginActivity : AppCompatActivity() {
-
+    lateinit var callbackManager: CallbackManager
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
+
+        callbackManager= CallbackManager.Factory.create()
+
         //測試用
         et_account_signin.setText("12345@gmail.com")
         et_password_signin.setText("123123")
@@ -55,17 +62,37 @@ class LoginActivity : AppCompatActivity() {
             google_login()
         }
 
+        //facebook登入按鈕
+        btn_facebook_login.setReadPermissions("email")
+        btn_facebook_login.registerCallback(callbackManager, object: FacebookCallback<LoginResult>{
+            override fun onSuccess(result: LoginResult?) {
+                val token = result!!.accessToken.token.toString()
+                val userId= result.accessToken.userId.toString()
+                println("=======facebook_Token=$token")
+                println("=======facebook_UserId=$userId")
+
+                //等Ray哥補上<第三方登入的api> 由後端去驗證tokem
+            }
+            override fun onCancel() {
+            }
+            override fun onError(error: FacebookException?) {
+            }
+        })
+
     }
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
+
         if (requestCode == 100){
             val result = Auth.GoogleSignInApi.getSignInResultFromIntent(data)
             handleLoginResult(result)
+        }else{
+            callbackManager.onActivityResult(requestCode, resultCode, data)
         }
     }
 
 
-    //登入的API
+    //一般登入API
     fun login_API(account: String, password: String){
         API.apiInterface.login(RequestLogin(account, password)).enqueue(object: retrofit2.Callback<ResponseLogin>{
             override fun onResponse(call: Call<ResponseLogin>, response: Response<ResponseLogin>){
@@ -81,6 +108,7 @@ class LoginActivity : AppCompatActivity() {
             }
         })
     }
+
     //用Google帳號登入
     private fun google_login(){
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -94,19 +122,18 @@ class LoginActivity : AppCompatActivity() {
         val signInIntent: Intent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient)
         startActivityForResult(signInIntent, 100)
     }
-    //接收google回傳結果
+
+    //接收Google回傳結果
     private fun handleLoginResult(result: GoogleSignInResult){
         if (result.isSuccess){
             val account = result.signInAccount
             val getEmail = account!!.email
-            val getId = account.id
+            val getidToken = account.idToken
             println("=======getEmail=$getEmail")
-            println("=======getId=$getId")
+            println("=======getidToken=$getidToken")
 
-            et_account_signin.setText(getEmail)
-            et_password_signin.setText(getId)
-            login_API(et_account_signin.text.toString(), et_password_signin.text.toString())
+            //等Ray哥補上<第三方登入的api> 由後端去驗證tokem
         }
-
     }
+
 }
