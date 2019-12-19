@@ -5,13 +5,11 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.carsharing.API
-import com.example.carsharing.R
-import com.example.carsharing.ResponseSearch
-import com.example.carsharing.SearchDetails
-import com.example.carsharing.search.SearchAdapter.Companion.unAssignList
+import com.example.carsharing.*
+import com.example.carsharing.lobby.PostAdapter
 import kotlinx.android.synthetic.main.activity_search.*
 import kotlinx.android.synthetic.main.layout_bottomsheet_search.*
 import retrofit2.Call
@@ -20,7 +18,7 @@ import retrofit2.Response
 
 class SearchActivity : AppCompatActivity() {
 
-    val searchAdapter = SearchAdapter()
+    val searchAdapter = PostAdapter()
     var currentPage = 1
     var lastPage:Int? = null
 
@@ -46,7 +44,7 @@ class SearchActivity : AppCompatActivity() {
             return intent
         }
 
-        lateinit var itemClicked:SearchDetails
+        lateinit var itemClicked:AllpostsDetails
     }
 
 
@@ -59,9 +57,9 @@ class SearchActivity : AppCompatActivity() {
         rv_search_result.adapter = searchAdapter
 
 
-        SearchAdapter.setToClick(object :SearchAdapter.mItemClickListener {
-            override fun toClick(items: SearchDetails) {
-                itemClicked = items
+        PostAdapter.setToClick(object :PostAdapter.ItemClickListener {
+            override fun toClick(item: AllpostsDetails) {
+                itemClicked = item
                 startActivity(Intent(this@SearchActivity,SearchDetailActivity::class.java))
             }
         })
@@ -77,7 +75,6 @@ class SearchActivity : AppCompatActivity() {
             }
             if(type==0) type=null
 
-            //換頁function
             switchPage()
 
         }
@@ -126,9 +123,11 @@ class SearchActivity : AppCompatActivity() {
                 println("response code: ${response.code()}")
                 if (response.code() == 200) {
                     var body = response.body()
-                    unAssignList.clear()
-                    unAssignList.addAll(body!!.data)
-                    val url = body.data
+                    PostAdapter.list.clear()
+                    PostAdapter.list.addAll(body!!.data)
+                    if(PostAdapter.list.size==0) tv_no_result.visibility = View.VISIBLE
+                    else tv_no_result.visibility = View.INVISIBLE
+
                     lastPage = body.meta.last_page
                     tv_search_current_page.text = "Page(${currentPage}/${lastPage})"
                     searchAdapter.notifyDataSetChanged()

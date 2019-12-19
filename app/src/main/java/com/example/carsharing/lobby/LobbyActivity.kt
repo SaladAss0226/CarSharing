@@ -316,7 +316,7 @@ class LobbyActivity : AppCompatActivity() {
                     allpostsList.clear()
                     allpostsList.addAll(dataList)
                     postAdapter.update(allpostsList)
-                    postAdapter.setToClick(object : PostAdapter.ItemClickListener{
+                    PostAdapter.setToClick(object : PostAdapter.ItemClickListener{
                         override fun toClick(item: AllpostsDetails) {
                             val intent = Intent(this@LobbyActivity, DetailActivity::class.java)
                             intent.putExtra("type", item.type)
