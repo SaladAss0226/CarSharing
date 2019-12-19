@@ -51,6 +51,7 @@ class PostAdapter: RecyclerView.Adapter<PostAdapter.ViewHolder>() {
                 tv_type.text = "批踢踢"
                 tv_type.setBackgroundResource(R.drawable.button_style02)
                 tv_type.setTextColor(Color.parseColor("#7CC47D"))
+
             }
             itemView.setOnClickListener {
                 clickListener?.toClick(item)

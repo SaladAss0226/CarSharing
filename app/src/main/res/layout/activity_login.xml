@@ -51,24 +51,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/et_account_signin" />
-
-    <Button
-        android:id="@+id/btn_sign_up"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:text="註冊"
-        android:textColor="@color/my05"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintVertical_bias="0.8"
-        android:background="@drawable/button_style02"
-        />
     <Button
         android:id="@+id/btn_sign_in"
         android:layout_width="300dp"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:text="登入"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -79,24 +65,42 @@
         android:background="@drawable/button_style01"
 
         />
-
     <Button
-        android:id="@+id/btn_google_login"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="16dp"
-        android:text="google"
+        android:id="@+id/btn_sign_up"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:text="註冊"
+        android:textColor="@color/my05"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_sign_up" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintVertical_bias="0.8"
+        android:background="@drawable/button_style02"
+        />
 
     <com.facebook.login.widget.LoginButton
         android:id="@+id/btn_facebook_login"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:text="facebook"
-        app:layout_constraintStart_toEndOf="@+id/btn_google_login"
-        app:layout_constraintTop_toTopOf="@+id/btn_google_login" />
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:text="註冊"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintVertical_bias="0.85" />
+
+    <Button
+        android:id="@+id/btn_google_login"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:text="google"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintVertical_bias="0.95"  />
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

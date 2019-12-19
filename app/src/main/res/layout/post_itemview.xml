@@ -28,7 +28,7 @@
             android:gravity="center"
             android:layout_gravity="center"
             android:padding="5dp"
-            android:text="批踢踢"
+            android:text="站內"
             android:textColor="@color/white"
             android:textSize="18sp" />
 

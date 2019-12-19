@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "431617477050",
+    "firebase_url": "https://direct-topic-255403.firebaseio.com",
+    "project_id": "direct-topic-255403",
+    "storage_bucket": "direct-topic-255403.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:431617477050:android:8edbab65644a3d8accb583",
+        "android_client_info": {
+          "package_name": "com.example.carsharing"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "431617477050-k7fbhce8h2m65imdal721i06hp89euq3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA3YWplfsR7BvQFTkX4J8vk8BQUEEirVnI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "431617477050-k7fbhce8h2m65imdal721i06hp89euq3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
