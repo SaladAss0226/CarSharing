@@ -13,14 +13,6 @@
     app:behavior_peekHeight="0dp"
     app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
         <ImageView
             android:id="@+id/icon_bottom_sheet_search"
             android:layout_width="50dp"
@@ -118,48 +110,61 @@
             app:layout_constraintTop_toBottomOf="@id/icon_bottom_sheet_search"
             app:layout_constraintVertical_bias="0.6" />
 
-        <Button
-            android:id="@+id/btn_inside_post"
-            android:layout_width="40dp"
-            android:layout_height="100dp"
-            android:background="@drawable/button_style02"
-            android:text="站\n內\n搜\n尋"
-
-
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.25"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_departure_date" />
-
-        <Button
-            android:id="@+id/btn_all_post"
-            android:layout_width="40dp"
-            android:layout_height="120dp"
-            android:background="@drawable/button_style02"
-            android:text="全\n站\n搜\n尋"
+        <info.hoang8f.android.segmented.SegmentedGroup
+            xmlns:segmentedgroup="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/browse_segment"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            segmentedgroup:sc_tint_color="@color/my05"
+            segmentedgroup:sc_checked_text_color="@color/white"
+            segmentedgroup:sc_border_width="1.5dp"
+            segmentedgroup:sc_corner_radius="10dp"
 
 
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintVertical_bias="0.2"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_departure_date" />
+            app:layout_constraintTop_toBottomOf="@id/tv_departure_date" >
 
-        <Button
-            android:id="@+id/btn_outside_post"
-            android:layout_width="40dp"
-            android:layout_height="100dp"
-            android:background="@drawable/button_style02"
-            android:text="站\n外\n搜\n尋"
+            <RadioButton
+                android:id="@+id/rb_search_inside"
+                android:text="站內搜尋"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                style="@style/RadioButton" />
 
+            <RadioButton
+                android:id="@+id/rb_search_all"
+                android:text="全站搜尋"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                style="@style/RadioButton" />
+            <RadioButton
+                android:id="@+id/rb_search_outside"
+                android:text="站外搜尋"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                style="@style/RadioButton" />
+        </info.hoang8f.android.segmented.SegmentedGroup>
 
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.75"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_departure_date" />
+    <Button
+        android:id="@+id/btn_search"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:text="確定"
+        android:textColor="@color/my05"
+        android:background="@drawable/button_style02"
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        app:layout_constraintTop_toBottomOf="@id/browse_segment"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

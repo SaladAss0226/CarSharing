@@ -199,27 +199,18 @@ class LobbyActivity : AppCompatActivity() {
                 calendarSearch.get(Calendar.MONTH),
                 calendarSearch.get(Calendar.DAY_OF_MONTH)).show()
         }
-        //站內搜尋
-        btn_inside_post.setOnClickListener {
-            val intent = SearchActivity.getIntent(this, date,et_departure_station.text.toString(),et_destination.text.toString(),1)
-            startActivity(intent)
-            bottomBehaviorSearch.isHideable=false
-            setSearchBottomViewVisible(bottomBehaviorSearch.state != BottomSheetBehavior.STATE_EXPANDED)
+        //點擊搜尋鈕
+        btn_search.setOnClickListener {
+            var id: Int = browse_segment.checkedRadioButtonId
+            if(id!==null){
+                when (id) {
+                    R.id.rb_search_inside -> search(1)
+                    R.id.rb_search_all -> search(0)
+                    R.id.rb_search_outside -> search(2)
+                }
+            }
+            else Toast.makeText(this,"請選擇搜尋模式",Toast.LENGTH_SHORT).show()
 
-        }
-        //站外搜尋
-        btn_outside_post.setOnClickListener {
-            val intent = SearchActivity.getIntent(this, date,et_departure_station.text.toString(),et_destination.text.toString(),2)
-            startActivity(intent)
-            bottomBehaviorSearch.isHideable=false
-            setSearchBottomViewVisible(bottomBehaviorSearch.state != BottomSheetBehavior.STATE_EXPANDED)
-        }
-        //全站搜尋
-        btn_all_post.setOnClickListener {
-            val intent = SearchActivity.getIntent(this, date,et_departure_station.text.toString(),et_destination.text.toString(),0)
-            startActivity(intent)
-            bottomBehaviorSearch.isHideable=false
-            setSearchBottomViewVisible(bottomBehaviorSearch.state != BottomSheetBehavior.STATE_EXPANDED)
         }
 
         //根據狀態，外部是否可被點擊
@@ -252,6 +243,13 @@ class LobbyActivity : AppCompatActivity() {
             }
         })
 
+    }
+
+    fun search(searchType:Int){
+        val intent = SearchActivity.getIntent(this, date,et_departure_station.text.toString(),et_destination.text.toString(),searchType)
+            startActivity(intent)
+            bottomBehaviorSearch.isHideable=false
+            setSearchBottomViewVisible(bottomBehaviorSearch.state != BottomSheetBehavior.STATE_EXPANDED)
     }
 
 
