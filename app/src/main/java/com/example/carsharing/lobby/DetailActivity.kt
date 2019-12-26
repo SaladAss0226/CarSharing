@@ -34,16 +34,17 @@ class DetailActivity : AppCompatActivity() {
         detail_destination.text = destination
         detail_subject.text = subject
         detail_date.text = date
-//        if (seat != 0){
-//            detail_seat.text = "剩餘 ${seat} 個座位"
-//        }
+        if (seat != 0){
+            detail_seat.text = "剩餘 ${seat} 個座位"
+        }
         if (type == 2){
             detail_seat.visibility = View.GONE
             imageView12.visibility = View.GONE
             constraint1.visibility = View.GONE
             val params = LinearLayout.LayoutParams(constraint2.getLayoutParams())
-            params.setMargins(0, 400, 0, 0)
+            params.setMargins(0, 700, 0, 0)
             constraint2.setLayoutParams(params)
+            btn_join.setText("前往原文連結")
         }
         detail_describe.text = description
 

@@ -39,8 +39,8 @@ class LoginActivity : AppCompatActivity() {
         callbackManager= CallbackManager.Factory.create()
 
         //測試用
-        et_account_signin.setText("12345@gmail.com")
-        et_password_signin.setText("123123")
+        et_account_signin.setText("opp@gmail.com")
+        et_password_signin.setText("oppopp")
 
         //前往註冊頁
         btn_sign_up.setOnClickListener {
@@ -54,6 +54,7 @@ class LoginActivity : AppCompatActivity() {
             }
             else{
                 login_API(et_account_signin.text.toString(), et_password_signin.text.toString())
+
             }
         }
 

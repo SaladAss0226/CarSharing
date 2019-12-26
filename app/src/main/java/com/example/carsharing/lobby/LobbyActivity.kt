@@ -3,6 +3,7 @@ package com.example.carsharing.lobby
 import android.animation.ObjectAnimator
 import android.animation.ValueAnimator
 import android.app.DatePickerDialog
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -25,6 +26,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 import android.util.Log
 import android.view.animation.LinearInterpolator
+import android.view.inputmethod.InputMethodManager
 import com.example.carsharing.search.SearchActivity
 
 
@@ -84,6 +86,8 @@ class LobbyActivity : AppCompatActivity() {
         //刊登頁返回
         sheet_back.setOnClickListener{
             hideBottomSheet()
+            rv_allposts.visibility = View.VISIBLE
+            toolbar_add.isClickable = true
         }
         //取得時間
         val calendar = Calendar.getInstance()
@@ -128,8 +132,13 @@ class LobbyActivity : AppCompatActivity() {
                             ed_description.setText("")
                             //跳回主頁並刷新成第一頁
                             hideBottomSheet()
+                            rv_allposts.visibility = View.VISIBLE
+                            toolbar_add.isClickable = true
                             current_page = 1
                             showPosts(current_page!!)
+                            //自動收起鍵盤
+                            var imm: InputMethodManager = ed_description.context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                            imm.hideSoftInputFromWindow(currentFocus?.getWindowToken(),0)
                         }
                     }
                 })
@@ -283,7 +292,7 @@ class LobbyActivity : AppCompatActivity() {
 
     //呈現全部文章
     fun showPosts(page: Int){
-        API.apiInterface.getAll(page).enqueue(object: Callback<ResponseAllposts>{
+        API.apiInterface.getAll(page,30).enqueue(object: Callback<ResponseAllposts>{
             override fun onFailure(call: Call<ResponseAllposts>, t: Throwable) {
             }
             override fun onResponse(call: Call<ResponseAllposts>, response: Response<ResponseAllposts>) {
