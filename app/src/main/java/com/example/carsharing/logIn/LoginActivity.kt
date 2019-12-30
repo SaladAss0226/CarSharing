@@ -1,40 +1,40 @@
 package com.example.carsharing.logIn
 
 import android.content.Intent
-import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.text.Html
-import android.text.method.LinkMovementMethod
-import android.util.Log
+import android.view.View
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.example.carsharing.API
 import com.example.carsharing.R
 import com.example.carsharing.RequestLogin
 import com.example.carsharing.ResponseLogin
 import com.example.carsharing.lobby.LobbyActivity
-import com.example.carsharing.search.SearchActivity
 import com.facebook.CallbackManager
 import com.facebook.FacebookCallback
 import com.facebook.FacebookException
 import com.facebook.login.LoginResult
 import com.google.android.gms.auth.api.Auth
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.auth.api.signin.GoogleSignInResult
 import com.google.android.gms.common.api.GoogleApiClient
 import kotlinx.android.synthetic.main.activity_login.*
-import kotlinx.android.synthetic.main.activity_login.btn_sign_up
-import kotlinx.android.synthetic.main.activity_search_detail.*
-import kotlinx.android.synthetic.main.activity_sign_up.*
 import retrofit2.Call
 import retrofit2.Response
-import javax.security.auth.callback.Callback
+
 
 class LoginActivity : AppCompatActivity() {
     lateinit var callbackManager: CallbackManager
+    lateinit var mGoogleSignInClient:GoogleSignInClient
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
+
+
 
         callbackManager= CallbackManager.Factory.create()
 
@@ -61,6 +61,15 @@ class LoginActivity : AppCompatActivity() {
         //google登入按鈕
         btn_google_login.setOnClickListener{
             google_login()
+            btn_google_login.visibility = View.INVISIBLE
+            btn_google_logout.visibility = View.VISIBLE
+        }
+
+        //google登出按鈕
+        btn_google_logout.setOnClickListener {
+            google_logOut()
+            btn_google_login.visibility = View.VISIBLE
+            btn_google_logout.visibility = View.INVISIBLE
         }
 
         //facebook登入按鈕
@@ -112,16 +121,34 @@ class LoginActivity : AppCompatActivity() {
 
     //用Google帳號登入
     private fun google_login(){
-        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            .requestEmail()
-            .build()
+//        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+//            .requestEmail()
+//            .build()
+//        val mGoogleApiClient = GoogleApiClient
+//            .Builder(this)
+//            .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
+//            .build()
 
-        val mGoogleApiClient = GoogleApiClient
-            .Builder(this)
-            .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
-            .build()
+        //申請憑證後拿到的ClientID
+        val clientID = "638951539726-a9f2g4r99t6hnql9kcdlplk0krd6kcc4.apps.googleusercontent.com"
+
+            var gso2 = GoogleSignInOptions
+                .Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(clientID)
+                .requestEmail()
+                .build()
+            var mGoogleApiClient = GoogleApiClient
+                .Builder(this)
+                .addApi(Auth.GOOGLE_SIGN_IN_API,gso2)
+                .build()
+        mGoogleSignInClient = GoogleSignIn.getClient(this,gso2)
+
         val signInIntent: Intent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient)
         startActivityForResult(signInIntent, 100)
+    }
+
+    private fun google_logOut(){
+        mGoogleSignInClient.signOut()
     }
 
     //接收Google回傳結果
@@ -133,7 +160,7 @@ class LoginActivity : AppCompatActivity() {
             println("=======getEmail=$getEmail")
             println("=======getidToken=$getidToken")
 
-            //等Ray哥補上<第三方登入的api> 由後端去驗證tokem
+            //等Ray哥補上<第三方登入的api> 由後端去驗證token
         }
     }
 
