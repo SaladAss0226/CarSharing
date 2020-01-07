@@ -102,21 +102,21 @@ data class Meta(
 
 //搜尋
 data class ResponseSearch(
-    val data: List<SearchDetails>,
+    val data: List<AllpostsDetails>,
     val links: Links,
     val meta: Meta
 )
 
-data class SearchDetails(
-    val created_at: String,
-    val departure: String,
-    val departure_date: String,
-    val description: String,
-    val destination: String,
-    val id: Int,
-    val ptt_url: String?,
-    val seat: Int,
-    val subject: String,
-    val type: Int,
-    val user_id: Int
-)
+//data class SearchDetails(
+//    val created_at: String,
+//    val departure: String,
+//    val departure_date: String,
+//    val description: String,
+//    val destination: String,
+//    val id: Int,
+//    val ptt_url: String?,
+//    val seat: Int,
+//    val subject: String,
+//    val type: Int,
+//    val user_id: Int
+//)

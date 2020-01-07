@@ -10,15 +10,19 @@ import com.example.carsharing.AllpostsDetails
 import com.example.carsharing.R
 
 class PostAdapter: RecyclerView.Adapter<PostAdapter.ViewHolder>() {
-    val list : MutableList<AllpostsDetails> = arrayListOf()
-    private var clickListener : ItemClickListener? = null
+
+    companion object{
+        val list : MutableList<AllpostsDetails> = arrayListOf()
+        private var clickListener : ItemClickListener? = null
+        fun setToClick(listener: ItemClickListener){
+            clickListener = listener
+        }
+    }
 
     interface ItemClickListener{
         fun toClick(item: AllpostsDetails)
     }
-    fun setToClick(listener: ItemClickListener){
-        clickListener = listener
-    }
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -40,13 +44,14 @@ class PostAdapter: RecyclerView.Adapter<PostAdapter.ViewHolder>() {
         fun bind(item: AllpostsDetails){
             tv_title.text = item.subject
             if (item.type == 1){
-                tv_type.setTextColor(Color.rgb(202, 62, 71))
+                tv_type.setTextColor(Color.parseColor("#ffffff"))
                 tv_type.text = "站內"
-                tv_type.setBackgroundResource(R.drawable.ic_bottom_shape2)
+                tv_type.setBackgroundResource(R.drawable.button_style01)
             }else{
                 tv_type.text = "批踢踢"
-                tv_type.setBackgroundResource(R.drawable.ic_bottom_shape)
-                tv_type.setTextColor(Color.rgb(36, 142, 169))
+                tv_type.setBackgroundResource(R.drawable.button_style02)
+                tv_type.setTextColor(Color.parseColor("#7CC47D"))
+
             }
             itemView.setOnClickListener {
                 clickListener?.toClick(item)

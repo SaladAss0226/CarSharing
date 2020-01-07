@@ -11,7 +11,7 @@ interface Api_Interface {
     @POST("/api/register")
     fun signUp(@Body item:RequestSignup):Call<ResponseSignup>
 
-    @POST("/api/login")
+        @POST("/api/login")
     fun login(@Body item:RequestLogin):Call<ResponseLogin>
 
     //登出
@@ -24,7 +24,8 @@ interface Api_Interface {
 
     //查看全部文章
     @GET("/api/post")
-    fun getAll(@Query ("page") page:Int): Call<ResponseAllposts>
+    fun getAll(@Query ("page") page:Int,
+               @Query ("row") row:Int): Call<ResponseAllposts>
 
     //搜尋
     @GET("/api/post")

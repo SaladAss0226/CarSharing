@@ -5,7 +5,8 @@
     android:id="@+id/layout_lobby"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="lobby.LobbyActivity">
+    tools:context="lobby.LobbyActivity"
+    android:background="@color/main_background">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"

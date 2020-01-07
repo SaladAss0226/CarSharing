@@ -3,6 +3,7 @@ package com.example.carsharing.lobby
 import android.animation.ObjectAnimator
 import android.animation.ValueAnimator
 import android.app.DatePickerDialog
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -25,6 +26,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 import android.util.Log
 import android.view.animation.LinearInterpolator
+import android.view.inputmethod.InputMethodManager
 import com.example.carsharing.search.SearchActivity
 
 
@@ -84,6 +86,8 @@ class LobbyActivity : AppCompatActivity() {
         //刊登頁返回
         sheet_back.setOnClickListener{
             hideBottomSheet()
+            rv_allposts.visibility = View.VISIBLE
+            toolbar_add.isClickable = true
         }
         //取得時間
         val calendar = Calendar.getInstance()
@@ -128,8 +132,13 @@ class LobbyActivity : AppCompatActivity() {
                             ed_description.setText("")
                             //跳回主頁並刷新成第一頁
                             hideBottomSheet()
+                            rv_allposts.visibility = View.VISIBLE
+                            toolbar_add.isClickable = true
                             current_page = 1
                             showPosts(current_page!!)
+                            //自動收起鍵盤
+                            var imm: InputMethodManager = ed_description.context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                            imm.hideSoftInputFromWindow(currentFocus?.getWindowToken(),0)
                         }
                     }
                 })
@@ -199,27 +208,18 @@ class LobbyActivity : AppCompatActivity() {
                 calendarSearch.get(Calendar.MONTH),
                 calendarSearch.get(Calendar.DAY_OF_MONTH)).show()
         }
-        //站內搜尋
-        btn_inside_post.setOnClickListener {
-            val intent = SearchActivity.getIntent(this, date,et_departure_station.text.toString(),et_destination.text.toString(),1)
-            startActivity(intent)
-            bottomBehaviorSearch.isHideable=false
-            setSearchBottomViewVisible(bottomBehaviorSearch.state != BottomSheetBehavior.STATE_EXPANDED)
+        //點擊搜尋鈕
+        btn_search.setOnClickListener {
+            var id: Int = browse_segment.checkedRadioButtonId
+            if(id!==null){
+                when (id) {
+                    R.id.rb_search_inside -> search(1)
+                    R.id.rb_search_all -> search(0)
+                    R.id.rb_search_outside -> search(2)
+                }
+            }
+            else Toast.makeText(this,"請選擇搜尋模式",Toast.LENGTH_SHORT).show()
 
-        }
-        //站外搜尋
-        btn_outside_post.setOnClickListener {
-            val intent = SearchActivity.getIntent(this, date,et_departure_station.text.toString(),et_destination.text.toString(),2)
-            startActivity(intent)
-            bottomBehaviorSearch.isHideable=false
-            setSearchBottomViewVisible(bottomBehaviorSearch.state != BottomSheetBehavior.STATE_EXPANDED)
-        }
-        //全站搜尋
-        btn_all_post.setOnClickListener {
-            val intent = SearchActivity.getIntent(this, date,et_departure_station.text.toString(),et_destination.text.toString(),0)
-            startActivity(intent)
-            bottomBehaviorSearch.isHideable=false
-            setSearchBottomViewVisible(bottomBehaviorSearch.state != BottomSheetBehavior.STATE_EXPANDED)
         }
 
         //根據狀態，外部是否可被點擊
@@ -254,6 +254,13 @@ class LobbyActivity : AppCompatActivity() {
 
     }
 
+    fun search(searchType:Int){
+        val intent = SearchActivity.getIntent(this, date,et_departure_station.text.toString(),et_destination.text.toString(),searchType)
+            startActivity(intent)
+            bottomBehaviorSearch.isHideable=false
+            setSearchBottomViewVisible(bottomBehaviorSearch.state != BottomSheetBehavior.STATE_EXPANDED)
+    }
+
 
     fun  hideBottomSheet(){
         bottomBehavior.isHideable=true
@@ -285,7 +292,7 @@ class LobbyActivity : AppCompatActivity() {
 
     //呈現全部文章
     fun showPosts(page: Int){
-        API.apiInterface.getAll(page).enqueue(object: Callback<ResponseAllposts>{
+        API.apiInterface.getAll(page,30).enqueue(object: Callback<ResponseAllposts>{
             override fun onFailure(call: Call<ResponseAllposts>, t: Throwable) {
             }
             override fun onResponse(call: Call<ResponseAllposts>, response: Response<ResponseAllposts>) {
@@ -303,7 +310,7 @@ class LobbyActivity : AppCompatActivity() {
                     allpostsList.clear()
                     allpostsList.addAll(dataList)
                     postAdapter.update(allpostsList)
-                    postAdapter.setToClick(object : PostAdapter.ItemClickListener{
+                    PostAdapter.setToClick(object : PostAdapter.ItemClickListener{
                         override fun toClick(item: AllpostsDetails) {
                             val intent = Intent(this@LobbyActivity, DetailActivity::class.java)
                             intent.putExtra("type", item.type)

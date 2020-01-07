@@ -32,9 +32,10 @@ class SearchDetailActivity : AppCompatActivity() {
             search_detail_seat.visibility = View.GONE
             search_imageView12.visibility = View.GONE
             search_constraint1.visibility = View.GONE
+            btn_join_search.setText("前往原文連結")
             //動態設定margin
             val params = LinearLayout.LayoutParams(search_constraint2.getLayoutParams())
-            params.setMargins(0, 400, 0, 0)
+            params.setMargins(0, 700, 0, 0)
             search_constraint2.setLayoutParams(params)
         }
 
@@ -48,6 +49,5 @@ class SearchDetailActivity : AppCompatActivity() {
             }
 
         }
-
     }
 }

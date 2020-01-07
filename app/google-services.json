@@ -1,42 +1,34 @@
 {
   "project_info": {
-    "project_number": "606061990903",
-    "firebase_url": "https://car-sharing-d464d.firebaseio.com",
-    "project_id": "car-sharing-d464d",
-    "storage_bucket": "car-sharing-d464d.appspot.com"
+    "project_number": "431617477050",
+    "firebase_url": "https://direct-topic-255403.firebaseio.com",
+    "project_id": "direct-topic-255403",
+    "storage_bucket": "direct-topic-255403.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:606061990903:android:80ddc7ada53b71046394f2",
+        "mobilesdk_app_id": "1:431617477050:android:8edbab65644a3d8accb583",
         "android_client_info": {
           "package_name": "com.example.carsharing"
         }
       },
       "oauth_client": [
         {
-          "client_id": "606061990903-4hcpv0eb1834e4m91g479qbtjcr0ug0i.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.example.carsharing",
-            "certificate_hash": "fc1361788d4a49eafbc992225aad9be6dae82c39"
-          }
-        },
-        {
-          "client_id": "606061990903-n882iq8nf80ea95t7rllvi45p636e005.apps.googleusercontent.com",
+          "client_id": "431617477050-k7fbhce8h2m65imdal721i06hp89euq3.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyC6JGRx40PVD71GdZJdUOQAp7V6naj-6BA"
+          "current_key": "AIzaSyA3YWplfsR7BvQFTkX4J8vk8BQUEEirVnI"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "606061990903-n882iq8nf80ea95t7rllvi45p636e005.apps.googleusercontent.com",
+              "client_id": "431617477050-k7fbhce8h2m65imdal721i06hp89euq3.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
